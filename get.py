@@ -10,7 +10,8 @@ def parse(r, symbol):
 
 	with open('data/{}.quote.json'.format(symbol), 'w') as f:
 		f.write(quote)
-
+	
+	print('parsed {}'.format(symbol))
 	return json.loads(quote)
 
 def get_quote(symbol):
@@ -21,8 +22,40 @@ def get_sp500():
 	with open('data/sp500.csv') as f:
 		return list(map(lambda x: x[:-1], f.readlines()))
 
-tickers = get_sp500()
-print(tickers)
-print('len: {}'.format(len(tickers)))
+def select_data(q):
+	data = {
+		symbol: q['price']['symbol'],
+		general: {
+			profitMargins: q['profitMargins']['fmt'],
+			52weekChange: q['52WeekChange']['fmt'],
+			sharesOutstanding: q['sharesOutstanding']['longFmt'],
+		},
+		info: {
+			sector: q['summaryProfile']['sector'],
+			industry: q['summaryProfile']['industry'],
+			employees: q['summaryProfile']['fullTimeEmployees'],
+			summary: q['summaryProfile']['longBusinessSummary'],
+			website: q['summaryProfile']['website'],
+		},
+		price: {
+			price: q['price']['regularMarketPrice']['fmt'],
+			marketOpen: q['price']['regularMarketOpen']['fmt'],
+			dayHigh: q['price']['regularMarketDayHigh'],
+			dayLow: q['price']['regularMarketDayLow'],
+			dollarChange: q['price']['regularMarketChange']['fmt'],
+			percentChange: q['price']['regularMarketChangePercent']['longFmt'],
+			volume: q['price']['regularMarketVolume']['longFmt'],
+			marketCap: q['price']['regularMarketCap']['longFmt'],
+		},
+		financial: {
+			
+		}
+	}
 
-get_quote(tickers[0]) # MMM (3M)
+tickers = get_sp500()
+for ticker in tickers:
+	get_quote(ticker)
+
+t = 'MSFT'
+select_data(get_quote(t)['defaultKeyStatistics'])
+
