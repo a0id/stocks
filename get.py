@@ -31,6 +31,7 @@ def select_data(q):
 			'sharesOutstanding': q['defaultKeyStatistics']['sharesOutstanding']['longFmt'],
 		},
 		'info': {
+			'companyName': q['quoteType']['longName'],
 			'sector': q['summaryProfile']['sector'],
 			'industry': q['summaryProfile']['industry'],
 			'employees': q['summaryProfile']['fullTimeEmployees'],
@@ -49,6 +50,9 @@ def select_data(q):
 		},
 		'financialData': {
 			'freeCashflow': q['financialData']['freeCashflow']['longFmt'],
+			'earningsGrowth': q['financialData']['earningsGrowth']['fmt'],
+			'returnOnAssets': q['financialData']['returnOnAssets']['fmt'],
+			'totalRevenue': q['financialData']['totalRevenue']['longFmt'],
 		}
 	}
 	return data
