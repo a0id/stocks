@@ -47,8 +47,9 @@ class GUI:
 
     def get_quote(self):
         symbol = self.ticker_box.get()
-        quote(symbol.upper())
-   
+        q = quote(symbol.upper())
+        print(q)
+
 gui = GUI()
 gui.start()
 

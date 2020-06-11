@@ -57,8 +57,17 @@ def select_data(q):
 	}
 	return data
 
+def bformat(obj):
+    return json.dumps(obj, indent=4)
+
 def bprint(obj):
 	print(json.dumps(obj, indent=4))
+
+def quote(symbol):
+	try:
+		return select_data(get_quote(symbol.upper()))
+	except Exception:
+		return 'invalid symbol'
 
 '''
 tickers = get_sp500()
