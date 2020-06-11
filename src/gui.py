@@ -50,6 +50,3 @@ class GUI:
         q = quote(symbol.upper())
         print(q)
 
-gui = GUI()
-gui.start()
-
