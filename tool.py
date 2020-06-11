@@ -1,4 +1,5 @@
-import requests, json
+import requests, json, os
+os.system('mkdir -p data')
 
 def parse(r, symbol):
 	delimiter = '"QuoteSummaryStore":{'
