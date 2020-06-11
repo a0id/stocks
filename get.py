@@ -24,38 +24,44 @@ def get_sp500():
 
 def select_data(q):
 	data = {
-		symbol: q['price']['symbol'],
-		general: {
-			profitMargins: q['profitMargins']['fmt'],
-			52weekChange: q['52WeekChange']['fmt'],
-			sharesOutstanding: q['sharesOutstanding']['longFmt'],
+		'symbol': q['price']['symbol'],
+		'general': {
+			'profitMargins': q['defaultKeyStatistics']['profitMargins']['fmt'],
+			'52weekChange': q['defaultKeyStatistics']['52WeekChange']['fmt'],
+			'sharesOutstanding': q['defaultKeyStatistics']['sharesOutstanding']['longFmt'],
 		},
-		info: {
-			sector: q['summaryProfile']['sector'],
-			industry: q['summaryProfile']['industry'],
-			employees: q['summaryProfile']['fullTimeEmployees'],
-			summary: q['summaryProfile']['longBusinessSummary'],
-			website: q['summaryProfile']['website'],
+		'info': {
+			'sector': q['summaryProfile']['sector'],
+			'industry': q['summaryProfile']['industry'],
+			'employees': q['summaryProfile']['fullTimeEmployees'],
+			'summary': q['summaryProfile']['longBusinessSummary'],
+			'website': q['summaryProfile']['website'],
 		},
-		price: {
-			price: q['price']['regularMarketPrice']['fmt'],
-			marketOpen: q['price']['regularMarketOpen']['fmt'],
-			dayHigh: q['price']['regularMarketDayHigh'],
-			dayLow: q['price']['regularMarketDayLow'],
-			dollarChange: q['price']['regularMarketChange']['fmt'],
-			percentChange: q['price']['regularMarketChangePercent']['longFmt'],
-			volume: q['price']['regularMarketVolume']['longFmt'],
-			marketCap: q['price']['regularMarketCap']['longFmt'],
+		'price': {
+			'price': q['price']['regularMarketPrice']['fmt'],
+			'marketOpen': q['price']['regularMarketOpen']['fmt'],
+			'dayHigh': q['price']['regularMarketDayHigh'],
+			'dayLow': q['price']['regularMarketDayLow'],
+			'dollarChange': q['price']['regularMarketChange']['fmt'],
+			'percentChange': q['price']['regularMarketChangePercent']['fmt'],
+			'volume': q['price']['regularMarketVolume']['longFmt'],
+			'marketCap': q['price']['marketCap']['longFmt'],
 		},
-		financial: {
-			
+		'financialData': {
+			'freeCashflow': q['financialData']['freeCashflow']['longFmt'],
 		}
 	}
+	return data
 
+def bprint(obj):
+	print(json.dumps(obj, indent=4))
+
+'''
 tickers = get_sp500()
 for ticker in tickers:
 	get_quote(ticker)
+'''
 
 t = 'MSFT'
-select_data(get_quote(t)['defaultKeyStatistics'])
+bprint(select_data(get_quote(t)))
 
