@@ -66,6 +66,6 @@ for ticker in tickers:
 	get_quote(ticker)
 '''
 
-t = 'MSFT'
-bprint(select_data(get_quote(t)))
+# t = 'MSFT'
+# bprint(select_data(get_quote(t)))
 
